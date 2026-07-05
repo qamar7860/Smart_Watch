@@ -61,7 +61,7 @@ void setup() {
 
     // Put a text label inside the button
     lv_obj_t *label = lv_label_create(btn);
-    lv_label_set_text(label, "  Hello QAMAR");
+    lv_label_set_text(label, "  Hello YOUR_NAME");
 }
 
 void loop() {
