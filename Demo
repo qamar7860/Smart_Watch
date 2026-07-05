@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <lvgl.h>
 #include "lv_conf.h"
-#include <TFT_eSPI.h> // Include your specific display library here
-#include "CST816S.h"   // Your touch library
+#include <TFT_eSPI.h> //  display library 
+#include "CST816S.h"   // touch library
 
 // Screen Resolution
 static const uint16_t screenWidth  = 240;
@@ -14,7 +14,7 @@ static uint8_t buf[screenWidth * screenHeight / 10 * (LV_COLOR_DEPTH / 8)];
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight);
 CST816S touch(6, 7, 13, 5); // sda, scl, rst, irq
 
-// LVGL v9 Display Flush Callback
+//Display Flush Callback
 void my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * px_map) {
     uint32_t w = (area->x2 - area->x1 + 1);
     uint32_t h = (area->y2 - area->y1 + 1);
@@ -27,7 +27,6 @@ void my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * px_map
     tft.pushColors((uint16_t *)px_map, w * h, true);
     tft.endWrite();
 
-    // IMPORTANT: Let LVGL know flushing is finished
     lv_display_flush_ready(disp);
 }
 
@@ -55,7 +54,7 @@ void setup() {
     // 4. Set the flush callback function
     lv_display_set_flush_cb(disp, my_disp_flush);
 
-    // --- YOUR CUSTOM UI STARTS HERE ---
+  
     // Create a simple button in the center
     lv_obj_t *btn = lv_button_create(lv_screen_active()); 
     lv_obj_align(btn, LV_ALIGN_CENTER, 0, 0);
